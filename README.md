@@ -24,6 +24,13 @@ npx expo start          # escanea el QR con la app Expo Go en el iPhone
 npx expo start --web    # versión de ordenador en el navegador
 ```
 
+## Versión web
+
+Cada cambio en `main` publica la versión web en GitHub Pages con el flujo `.github/workflows/web.yml`:
+https://rulovicari06-gif.github.io/raulferrando-app-opositores.rich/
+
+En el iPhone, ábrela en Safari y usa Compartir → Añadir a pantalla de inicio para tenerla como una app.
+
 ## Desarrollo
 
 ```bash
