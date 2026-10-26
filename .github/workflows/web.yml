@@ -4,6 +4,8 @@ name: Publicar web
 on:
   push:
     branches: [main]
+  # En las solicitudes de cambio solo se comprueba que la web se construye.
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -37,6 +39,7 @@ jobs:
           path: dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
