@@ -4,6 +4,8 @@ name: Publicar web
 on:
   push:
     branches: [main]
+  # En las solicitudes de cambio solo se comprueba que la web se construye.
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -25,6 +27,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Expo genera este archivo de tipos al arrancar; no está en el repositorio.
+      - run: echo '/// <reference types="expo/types" />' > expo-env.d.ts
       - run: npx tsc --noEmit
       - run: npx eslint src
       - run: npx expo export -p web
@@ -35,6 +39,7 @@ jobs:
           path: dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
