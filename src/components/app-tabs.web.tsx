@@ -1,5 +1,6 @@
 import { Tabs, TabList, TabTrigger, TabSlot, TabTriggerSlotProps, TabListProps } from 'expo-router/ui';
 import { Pressable, View, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -46,8 +47,9 @@ export function TabButton({ children, isFocused, ref: _ref, ...props }: TabTrigg
 
 export function CustomTabList(props: TabListProps) {
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
   return (
-    <View {...props} style={styles.tabListContainer}>
+    <View {...props} style={[styles.tabListContainer, { paddingBottom: Spacing.three + insets.bottom }]}>
       <ThemedView type="backgroundElement" style={[styles.innerContainer, { borderColor: theme.border }]}>
         {props.children}
       </ThemedView>

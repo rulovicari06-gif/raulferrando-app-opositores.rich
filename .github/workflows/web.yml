@@ -32,6 +32,7 @@ jobs:
       - run: npx tsc --noEmit
       - run: npx eslint src
       - run: npx expo export -p web
+      - run: node scripts/web-head.js
       # GitHub Pages no sabe de rutas de la app: con 404.html cualquier ruta abre la app.
       - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
