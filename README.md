@@ -1,56 +1,42 @@
-# Welcome to your Expo app 👋
+# Opositor Diario
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App para opositores que organiza el día: qué estudiar, cómo estudiarlo y cuándo, con avisos, apuntes por tema y tests de repaso tipo concurso. Sirve para cualquier oposición; incluye plantillas de partida (bombero forestal, bombero, policía, Guardia Civil, administrativo, docente u otra a medida).
 
-## Get started
+Funciona en iPhone, Android y en el navegador del ordenador. Está hecha con [Expo](https://expo.dev) (React Native) y Expo Router.
 
-1. Install dependencies
+## Qué incluye esta primera versión
 
-   ```bash
-   npm install
-   ```
+- **Bienvenida con frase motivadora** cada vez que abres la app, y frase del día en la pantalla Hoy.
+- **Hoy**: los bloques del día (teoría, psicotécnicos y preparación física) con su hora, el método de estudio paso a paso y un temporizador.
+- **Plan adaptable**: el plan se calcula cada día a partir del estado de tus temas. Cada tema pasa por primera lectura → esquema → repaso activo y test → dominado. Los temas dominados vuelven en repasos espaciados (1, 3, 7, 15, 30 y 60 días) y si fallas un test el tema vuelve al día siguiente. Si un día no cumples, lo pendiente pasa al siguiente. Con fecha de examen, te dice si llegas a tiempo.
+- **Asignaturas y temas**, con documentos (PDF, fotos, apuntes) guardados en cada tema.
+- **Test tipo Kahoot** por tema: cuenta atrás, cuatro colores, puntos por rapidez y rachas. Las preguntas se añaden una a una o pegando varias a la vez.
+- **Progreso**: racha de días, nota media, temas dominados y minutos de los últimos 7 días.
+- **Avisos** (en el móvil): frase motivadora antes de empezar y aviso al comienzo de cada bloque.
 
-2. Start the app
+Los datos se guardan en el propio dispositivo. La sincronización entre móvil y ordenador es el siguiente paso.
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Probarla
 
 ```bash
-npm run reset-project
+npm install
+npx expo start          # escanea el QR con la app Expo Go en el iPhone
+npx expo start --web    # versión de ordenador en el navegador
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Desarrollo
 
-### Other setup steps
+```bash
+npx tsc --noEmit        # comprobación de tipos
+npx eslint src          # lint
+npx expo export -p web  # genera la versión web en dist/
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+El código está en `src/`:
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `src/app/` pantallas (Expo Router): `(tabs)/` Hoy, Plan, Asignaturas y Progreso; `onboarding`, `ajustes`, `asignatura/[id]`, `tema/[id]`, `bloque/[id]` y `test/[id]`.
+- `src/lib/plan.ts` lógica del plan adaptable y de la repetición espaciada.
+- `src/lib/store.ts` datos de la app, guardados con AsyncStorage.
+- `src/lib/notifications.ts` avisos programados para los próximos 7 días.
+- `src/lib/documents.ts` subida y apertura de documentos (en el navegador se guardan en IndexedDB).
+- `src/lib/quotes.ts` frases motivadoras.

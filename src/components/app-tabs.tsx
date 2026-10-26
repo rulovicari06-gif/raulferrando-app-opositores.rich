@@ -10,22 +10,24 @@ export default function AppTabs() {
   return (
     <NativeTabs
       backgroundColor={colors.background}
-      indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
+      indicatorColor={colors.backgroundSelected}
+      tintColor={colors.primary}
+      labelStyle={{ selected: { color: colors.primary } }}>
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Label>Hoy</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="sun.max.fill" md="wb_sunny" />
       </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+      <NativeTabs.Trigger name="plan">
+        <NativeTabs.Trigger.Label>Plan</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="calendar" md="calendar_month" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="asignaturas">
+        <NativeTabs.Trigger.Label>Asignaturas</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="books.vertical.fill" md="menu_book" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="progreso">
+        <NativeTabs.Trigger.Label>Progreso</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="chart.bar.fill" md="bar_chart" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );
