@@ -25,6 +25,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Expo genera este archivo de tipos al arrancar; no está en el repositorio.
+      - run: echo '/// <reference types="expo/types" />' > expo-env.d.ts
       - run: npx tsc --noEmit
       - run: npx eslint src
       - run: npx expo export -p web
